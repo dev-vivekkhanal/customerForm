@@ -7,6 +7,7 @@ import img4 from "./assets/4.png";
 import img5 from "./assets/5.png";
 
 function App() {
+  // local variables
   const experienceFaces = [
     {
       image: img1,
@@ -29,10 +30,11 @@ function App() {
       text: "Excellent",
     },
   ];
+  const importantFields = ["name", "mobile"];
 
+  // states
   const [activeForm, setActiveForm] = useState(true);
   const [errorStatus, setErrorStatus] = useState(false);
-
   const [formData, setFormData] = useState({
     name: "",
     mobile: "",
@@ -40,20 +42,22 @@ function App() {
     feedback: "",
   });
 
-  const importantFields = ["name", "mobile"];
-
+  // functions
   const onFormSubmit = (e) => {
     e.preventDefault();
     setErrorStatus(false);
 
+    // check if all important fields are filled
     const allFieldsFilled = importantFields.every((field) => !!formData[field]);
 
+    // error handling
     if (!allFieldsFilled) {
       setErrorStatus(true);
       console.log("Please fill in all important fields");
       return;
     }
 
+    // send api call or anyother task with the submitted details
     console.log("Submitted Data:", formData);
     setFormData({
       name: "",
