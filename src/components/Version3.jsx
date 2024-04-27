@@ -99,6 +99,7 @@ function Version3() {
       })
       .catch((error) => {
         console.error("Error:", error);
+        alert("Something went wrong! Please try again.");
       });
   };
 
