@@ -1,12 +1,10 @@
-import Version1 from "./components/Version1";
-import Version2 from "./components/Version2";
-
+import Version3 from "./components/Version3";
+import { Routes, Route } from "react-router-dom";
 function App() {
   return (
-    <>
-      {/* <Version1 /> */}
-      <Version2 />
-    </>
+    <Routes>
+      <Route path="/gbm/api/feedback_form/" element={<Version3 />} />
+    </Routes>
   );
 }
 
