@@ -115,6 +115,10 @@ function Version3() {
       });
   };
 
+  useEffect(() => {
+    console.log("errorStatus", errorStatus);
+  }, [errorStatus]);
+
   return (
     <main className="min-h-screen bg-[#fefefe] min-w-[430px]">
       <div className="w-full max-w-[30rem] mx-auto p-5 pt-0">
@@ -213,19 +217,22 @@ function Version3() {
               }
               value={formData.feedback}
             ></textarea>
-            {errorStatus?.apiError ||
-              (errorStatus?.inputFieldsFilledStatus && (
-                <div className="flex items-center text-xs text-red-500 font-semibold gap-2 mb-5">
-                  <p className="text-sm aspect-square w-5 flex justify-center items-center font-semibold rounded-full border-red-500 border animate-bounce">
-                    !
-                  </p>{" "}
-                  {errorStatus?.inputFieldsFilledStatus ? (
-                    <p>Please fill in all important fields</p>
-                  ) : (
-                    <p>Something went wrong! Please try again.</p>
-                  )}
-                </div>
-              ))}
+            {errorStatus?.apiError && (
+              <div className="flex items-center text-xs text-red-500 font-semibold gap-2 mb-5">
+                <p className="text-sm aspect-square w-5 flex justify-center items-center font-semibold rounded-full border-red-500 border animate-bounce">
+                  !
+                </p>{" "}
+                <p>Something went wrong! Please try again.</p>
+              </div>
+            )}{" "}
+            {errorStatus?.inputFieldsFilledStatus && (
+              <div className="flex items-center text-xs text-red-500 font-semibold gap-2 mb-5">
+                <p className="text-sm aspect-square w-5 flex justify-center items-center font-semibold rounded-full border-red-500 border animate-bounce">
+                  !
+                </p>{" "}
+                <p>Please fill in all important fields</p>
+              </div>
+            )}
             {activeForm ? (
               <button className="w-full p-3 bg-amber-500 rounded-md font-semibold text-white">
                 Submit
