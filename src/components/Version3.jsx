@@ -37,7 +37,10 @@ function Version3() {
   const searchParams = new URLSearchParams(location.search);
   // states
   const [activeForm, setActiveForm] = useState(true);
-  const [errorStatus, setErrorStatus] = useState(false);
+  const [errorStatus, setErrorStatus] = useState({
+    inputFieldsFilledStatus: false,
+    apiError: false,
+  });
   const [formData, setFormData] = useState({
     name: "",
     mobile: "",
@@ -66,14 +69,20 @@ function Version3() {
   // functions
   const onFormSubmit = (e) => {
     e.preventDefault();
-    setErrorStatus(false);
+    setErrorStatus({
+      inputFieldsFilledStatus: false,
+      apiError: false,
+    });
 
     // check if all important fields are filled
     const allFieldsFilled = importantFields.every((field) => !!formData[field]);
 
     // input precheck / validator
     if (!allFieldsFilled) {
-      setErrorStatus(true);
+      setErrorStatus({
+        inputFieldsFilledStatus: true,
+        ...errorStatus,
+      });
       console.warn("Please fill in all important fields");
       return;
     }
@@ -99,7 +108,10 @@ function Version3() {
       })
       .catch((error) => {
         console.error("Error:", error);
-        setErrorStatus(true);
+        setErrorStatus({
+          ...errorStatus,
+          apiError: true,
+        });
       });
   };
 
@@ -201,14 +213,19 @@ function Version3() {
               }
               value={formData.feedback}
             ></textarea>
-            {errorStatus && (
-              <div className="flex items-center text-xs text-red-500 font-semibold gap-2 mb-5">
-                <p className="text-sm aspect-square w-5 flex justify-center items-center font-semibold rounded-full border-red-500 border animate-bounce">
-                  !
-                </p>{" "}
-                <p>Please fill in all important fields</p>
-              </div>
-            )}
+            {errorStatus?.apiError ||
+              (errorStatus?.inputFieldsFilledStatus && (
+                <div className="flex items-center text-xs text-red-500 font-semibold gap-2 mb-5">
+                  <p className="text-sm aspect-square w-5 flex justify-center items-center font-semibold rounded-full border-red-500 border animate-bounce">
+                    !
+                  </p>{" "}
+                  {errorStatus?.inputFieldsFilledStatus ? (
+                    <p>Please fill in all important fields</p>
+                  ) : (
+                    <p>Something went wrong! Please try again.</p>
+                  )}
+                </div>
+              ))}
             {activeForm ? (
               <button className="w-full p-3 bg-amber-500 rounded-md font-semibold text-white">
                 Submit
