@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 function App() {
   return (
     <Routes>
-      <Route path="/gbm/api/feedback_form/" element={<Version3 />} />
+      <Route path="/" element={<Version3 />} />
     </Routes>
   );
 }
