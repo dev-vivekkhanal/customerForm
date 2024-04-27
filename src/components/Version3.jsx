@@ -123,7 +123,13 @@ function Version3() {
     <main className="min-h-screen bg-[#fefefe] min-w-[430px]">
       <div className="w-full max-w-[30rem] mx-auto p-5 pt-0">
         <header className="flex justify-center items-center gap-5 mb-2">
-          <img src={circle} alt="logo" className="w-14" />
+          <a
+            href="https://www.ekoinfomatics.com/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <img src={circle} alt="logo" className="w-14" />
+          </a>
         </header>
 
         <section>
