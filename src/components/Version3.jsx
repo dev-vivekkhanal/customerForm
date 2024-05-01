@@ -99,7 +99,7 @@ function Version3() {
     axios
       .post("https://andaal.in/gbm/api/submit_feedback", formDatas, {
         headers: {
-          "Content-Type": "multipart/form-data",
+          "Content-Type": "application/json",
         },
       })
       .then((response) => {
@@ -120,7 +120,7 @@ function Version3() {
   }, [errorStatus]);
 
   return (
-    <main className="min-h-screen bg-[#fefefe] min-w-[430px]">
+    <main className="min-h-screen bg-[#fefefe] p-2">
       <div className="w-full max-w-[30rem] mx-auto p-5 pt-0">
         <header className="flex justify-center items-center gap-5 mb-2">
           <a
